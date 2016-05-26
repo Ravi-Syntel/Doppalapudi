@@ -1,0 +1,124 @@
+Spring & Hibernate
+
+1: Connection Pool
+Connection pool is good for performance, as it prevents Java application create a connection each time when interact with database and minimizes the cost of opening and closing connections.
+	To configure c3p0, puts the c3p0 configuration details in “hibernate.cfg.xml“, like this :
+  property name="hibernate.c3p0.min_size">5</property>
+  <property name="hibernate.c3p0.max_size">20</property>
+  <property name="hibernate.c3p0.timeout">300</property>
+  <property name="hibernate.c3p0.max_statements">50</property>
+  <property name="hibernate.c3p0.idle_test_period">3000</property>
+
+2:Hibernate – Cascade example (save, update, delete and delete-orphan)
+ 
+ Cascade” keyword is often appear on the collection mapping to manage the state of the collection automatically.
+  
+  Without save-update cascade
+	session.save(stock);
+	session.save(stockDailyRecords);
+		
+  With save-update cascade
+	cascade=”save-update” is declared in ‘stockDailyRecords’ to enable the save-update cascade effect.
+	<set name="stockDailyRecords" cascade="save-update" table="stock_daily_record"...>
+	session.save(stock);
+	session.save(stockDailyRecords); is no longer required, when you save the ‘Stock’, it will “cascade” the save operation to it’s referenced ‘stockDailyRecords’ and save both into database automatically.
+
+3:Cascade vs inverse
+ <set name="stockDailyRecords" table="stock_daily_record" cascade="save-update" inverse="true">
+
+ “inverse” is decide which side will update the foreign key, while
+ “cascade” is decide what’s the follow by operation should execute. Both are look quite similar in relationship, but it’s totally two different things.
+ 
+4:What is dynamic-insert
+The dynamic-insert attribute tells Hibernate whether to include null properties in the SQL INSERT statement.
+ 1. dynamic-insert=false
+	The default value of dynamic-insert is false, which means include null properties in the Hibernate’s SQL INSERT statement.
+ 2. dynamic-insert=true
+	If set the dynamic-insert to true, which means exclude null property values in the Hibernate’s SQL INSERT statement.
+	<class ... table="stock_transaction" catalog="mkyong" dynamic-insert="true">
+ 3: dynamic-update=true
+
+
+5:Different between session.get() and session.load()
+	1. session.load()
+	It will always return a “proxy” (Hibernate term) without hitting the database. 
+	In Hibernate, proxy is an object with the given identifier value, its properties are not initialized yet, it just look like a temporary fake object.
+	If no row found , it will throws an ObjectNotFoundException.
+	2. session.get()
+	It always hit the database and return the real object, an object that represent the database row, not proxy.
+	If no row found , it return null.
+
+6:
+**********************************************************************
+Spring integration 
+
+Endpoints
+	Producers
+	Consumers
+Chanels
+	Pollable Channel   - typically a point to point channel - one producer one consumer, only one reciver of a message in the channel					 
+	Subscibable Channel - Allows multiple subscribers.
+message
+	hedaer - it contains system information
+	payload - it contains data
+Adapters: - it's connect your channel to some other system
+	Inbound-: it's bring messages into the SI(Spring Integation) Channels
+	Outbound:- get the messages from SI channels to the outside application,databases, etc.
+		SI Adpters: 
+			Stream Adapters
+			JMS Adapters
+					INBOUND ADAPTER
+					<int-jms:inbound-channel-adapter id="my-inbound-jms-adapter"
+					Connection-factory="jmsConnectionFactorySecured"
+					destinatiom="in.message.queue.name"
+					channel="my-message-channel"
+					int:poller fixed-rate="3000" />
+					</int-jms:inbound-channel-adapter>
+					
+					OUTBOUND Adapter
+					<int-jms:outbound-channel-adapter id="my-inbound-jms-adapter"
+					Connection-factory="jmsConnectionFactorySecured"
+					destinatiom="in.message.queue.name"
+					channel="my-message-channel"
+					int:poller fixed-rate="3000" />
+					</int-jms:outbound-channel-adapter>
+					
+			JDBC & JPA Adapters
+			FTP & SFTP Adapters
+			Mail Adapters
+			MongoDB Adapters
+			UDP Adapters
+Filter:- remove the messgaes from channels based on header,content etc.
+		Built-in Filters:
+			1: Expression Filter: a filter that uses an evaluated SpEL expression against the message to select messages
+			2: Xpath filter: Use Xpath expression against XML payload to select message
+			3: XML Validation Filter: select XML payload messages that validate against a given schema.
+			
+			MessgaeSelector - interface implements for custom filter
+			
+		<int:filter input-channel="inboundChannel"
+					output-channel="outboundCjannel"
+					expression="payload.startsWith("Hello")">	
+Transformers: - convert message content or structure
+		SI Transformers:
+			1: XML to Object / object to XML
+			2: object to String/ String to object
+			3: object to JSON/JSON to object
+		<int:object-to-String-transformer input-channel="inboundChannel" output-channel="outboundChannel">	
+Routers: they take messages from one channel and distribute the message to one or more other channels
+		<int:payload-type-router input-channel="inboundChannel">
+			<int:mapping type="java.lang.integer" channel="integerChannel"/>
+		</int:payload-type-router>
+Enricher: add content to the message header or payload
+		<int:header-enricher input-channel="inboundChannel" output-channel="outboundCjannel">
+			<int:priority value="HIGHEST"/>
+			<int:header name="paymentAccountId" value="1234"/>
+		</int:header-enricher>
+Service Activator: invoke service operations based on the arrival of a message
+		<int:service-activator id="printing-service-activator" input-channel="inboundChannel" ref="serviceBean"/>
+		<bean id="serviceBean" class="com.thoughtwave.ExampleServiceBean"/>
+Gateway: Connect your channels without SI Coupling
+
+******************************************************************
+
+Spring Boot:

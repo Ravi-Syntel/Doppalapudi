@@ -1,0 +1,46 @@
+
+1:Different SQL JOINS
+	INNER JOIN: Returns all rows when there is at least one match in BOTH tables
+	LEFT JOIN: Return all rows from the left table, and the matched rows from the right table
+	RIGHT JOIN: Return all rows from the right table, and the matched rows from the left table
+	FULL JOIN: Return all rows when there is a match in ONE of the tables
+	
+	SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+	FROM Orders
+	INNER JOIN Customers
+	ON Orders.CustomerID=Customers.CustomerID;
+
+2:we have the following constraints:
+	NOT NULL - Indicates that a column cannot store NULL value
+	UNIQUE - Ensures that each row for a column must have a unique value
+	PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Ensures that a column (or combination of two or more columns) have a unique identity which helps to find a particular record in a table more easily and quickly
+	FOREIGN KEY - Ensure the referential integrity of the data in one table to match values in another table
+	CHECK - Ensures that the value in a column meets a specific condition
+	DEFAULT - Specifies a default value for a column
+
+
+main diffences between procedure and function as follows
+
+              procedure                                                                    function
+1>procedure is used for performing                            1> its used for computing value
+   action                                                                                 and returning value
+
+2> procedure may or maynot return                             2> function must and should 
+     value                                                                              return value
+
+3>it cant be used inside sql statement                        3>it can be called inside sql 
+                                                                                            statement
+4> its cant be called as part of expression                  4>its always called as part of 
+                                                                                              expression
+
+																							  
+																							  
+
+																							  
+																							  
+																							  
+1: Restful webservices
+2: GWT Framework
+3: PL/SQL Store Procedures
+4: coreJava
+5: resume & Myself

@@ -1,0 +1,96 @@
+
+408 643 3950
+
+1: Source Control Management
+	1: SVN
+	2: Clear Case
+	3: CVS
+2: Build Tools
+	1: Ant - Build.xml
+	2: Maven - pom.xml
+		mvn verify
+		mvn test - 
+		MVN deploy - nexus upload
+		MVN instal - clean & build 
+		
+		
+		1: what are the steps involved in project deployment.
+			Check-in the code from all projects in progress into the SVN or source code repository and tag it.
+			Download the complete source code from SVN.
+			Build the application.
+			Store the build output either WAR or EAR file to a common network location.
+			Get the file from network and deploy the file to the certified site.
+			Updated the documentation with date and updated version number of the application.
+		
+		2: what are the phases of a Maven Build LifeCycle?
+			Following are the phases −
+			validate − validate the project is correct and all necessary information is available.
+			compile − compile the source code of the project.
+			test − test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+			package − take the compiled code and package it in its distributable format, such as a JAR.
+			integration-test − process and deploy the package if necessary into an environment where integration tests can be run
+			verify − run any checks to verify the package is valid and meets quality criteria.
+			install − install the package into the local repository, for use as a dependency in other projects locally.
+			deploy − done in an integration or release environment, copies the final package to the remote repository for sharing with other developers and projects.
+			
+		3: setting.xml
+			  <localRepository/>
+			  <interactiveMode/>
+			  <usePluginRegistry/>
+			  <offline/>
+			  <pluginGroups/>
+			  <servers/>
+			  <mirrors/>
+			  <proxies/>
+			  <profiles/>
+			  <activeProfiles/>
+		
+3: Life cycle of build deployment
+	generally it will triggered
+	ci - test - publish - QA
+	on demand -its trigger by mannullay
+4: 
+		
+3: Jenkins
+	1: configure system
+	2: Globol settings
+	3: manage plugin
+	Unsecured -
+	it connected LDAP
+4: Servers
+	1: Tomcat Server - server.xml, tomcat-users.xml
+	2: JBOSS - Standalone.xml
+	3: Websphere Server - Server-scope:
+		• resources.xml
+		Contains the configuration of resources, such as, JDBC, JMS, JavaMail, and URL end points at server scope
+		• server.xml
+		Contains application server configuration data
+5: UNIX
+	Scripting
+	Commands
+
+6: Nexus,AWS,Project Comman Questions
+
+		1:Nexus: .m2/setting.xml
+			<mirror>
+			  <id>planetmirror.com</id>
+			  <name>PlanetMirror Australia</name>
+			  <url>http://localhost:8081/nexus/content/groups/public</url>
+			  <mirrorOf>central</mirrorOf>
+			</mirror>
+			<pluginGroups>
+				<pluginGroup>org.sonatype.plugin</pluginGroup>
+			</pluginGroups>
+		2: staging
+
+tell me about your project
+
+1: Data Governance Project
+2: State street bank & trust company
+3: Technical environent, source control system as a Clear case, build environment as a maven, CI environment as a Jenkins and artifact repartsiary as Nexus
+	application servers as a Apcahe tomact and Webspahere
+	
+Developement:
+current role
+prevoius role - webservice,team - 4 members
+resume.

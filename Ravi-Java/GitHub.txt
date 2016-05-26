@@ -1,0 +1,7 @@
+GIT Commands:
+
+1: git clone https://github.com/Ravi-Syntel/Doppalapudi.git
+2: git status
+3: git add java.txt
+4: git commit -m "added file"
+5: git push

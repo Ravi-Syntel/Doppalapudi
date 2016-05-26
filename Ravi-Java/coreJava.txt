@@ -1,0 +1,139 @@
+1: what is volatile?
+	The volatile keyword is used to say to the jvm "Warning, this variable may be modified in an other Thread". 
+	Without this keyword the JVM is free to make some optimizations, like never refreshing those local copies in some threads.
+	
+	private static volatile int MY_INT = 0;
+	
+	with volatile:
+	Incrementing MY_INT to 1
+	Got Change for MY_INT : 1
+	
+	Without Volatile
+	Incrementing MY_INT to 1
+	
+	
+2: HashMap working internally?
+	Whenever we call get( Key k )  method on the HashMap object . First it checks that whether key is null or not . 
+	 Note that there can only be one null key in HashMap .  
+	If key is null , then Null keys always map to hash 0, thus index 0.
+	If key is not null then , it will call hashfunction on the key object ,  i.e. key.hashCode()  ,
+	so after key.hashCode() returns hashValue.
+
+	 int hash = hash(hashValue)
+	final  hashvalue is used to find the bucket location at which the Entry object is stored .
+	Entry object stores in the bucket like this (hash,key,value,bucketindex) .  
+
+
+2: How to find user defined objects as a key from HashMap?
+	Price key = new Price("Banana", 20);
+    System.out.println("Does key available? "+hm.containsKey(key));
+
+	class Price{
+	public int hashCode(){
+        System.out.println("In hashcode");
+        int hashcode = 0;
+        hashcode = price*20;
+        hashcode += item.hashCode();
+        return hashcode;
+    }
+     
+    public boolean equals(Object obj){
+        System.out.println("In equals");
+        if (obj instanceof Price) {
+            Price pp = (Price) obj;
+            return (pp.item.equals(this.item) && pp.price == this.price);
+        } else {
+            return false;
+        }
+    }
+ }
+ 
+ 3: how to make singleton class as a synchronized?
+	piblic class UserTracking {
+	private static UserTracking instance = null;
+	protected UserTracking(){
+	}
+	public static UserTracking getInstance(){
+	if(instance == null){
+	synchronized(UserTracking.class){
+	if(instance == null){
+	instance = new UserTracking();
+	}
+	}
+	}
+	return instance;
+	}
+	}
+	
+ 4: how to find duplicate elements in ArrayList?
+	
+	public statc Set<String> findDuplicates(List<String> listContainsDuplicates){
+	final set<String> setToresturn = new HashSet<String>();
+	final set<String> setDuplicates = new HashSet<String>();
+	for(String yourInt : listContainsDuplicates){
+	if(!setToresturn.add(yourInt)){
+	setDuplicates.add(yourInt);
+	}
+	}
+	return setDuplicates;
+	}
+ 
+ 5: Junit annotation 
+	@Test
+	@Test (expected = Exception.class)
+	@Test(timeout=100)
+	@Before
+	@After
+	@BeforeClass
+	@AfterClass
+
+6: Java 7 Features Revisited & Java 8 Features Revisited
+	1.  Diamond Operator
+	2.  Using strings in switch statement
+	3.  Automatic resource management
+	4.  Numeric literals with underscore
+	5.  Improved Exception Handling
+	6.  New File System API (NIO 2.0)
+	7.  Fork and Join
+
+	1: Defender Methods
+	2: Lambda Expressions
+	
+7: Comparable & Comparator
+	1: Sorting logic must be in same class whose objects are being sorted. Hence this is called natural ordering of objects	
+	2: int compareTo(Object o1)
+		This method compares this object with o1 object and returns a integer.Its value has following meaning
+		1. positive – this object is greater than o1
+		2. zero – this object equals to o1
+		3. negative – this object is less than o1	
+	3: Collections.sort(List)
+		Here objects will be sorted on the basis of CompareTo method
+	4:Java.lang.Comparable - package
+	
+		public class Country implements Comparable{
+       @Override
+    public int compareTo(Object arg0) {
+        Country country=(Country) arg0;
+        return (this.countryId < country.countryId ) ? -1: (this.countryId > country.countryId ) ? 1:0 ;
+		}}
+	
+	Comparator:
+	1:Sorting logic is in separate class. Hence we can write different sorting based on different attributes of objects to be sorted. E.g. Sorting using id,name etc.
+	2:int compare(Object o1,Object o2)
+		This method compares o1 and o2 objects. and returns a integer.Its value has following meaning.
+		1. positive – o1 is greater than o2
+		2. zero – o1 equals to o2
+		3. negative – o1 is less than o1
+	3:Collections.sort(List, Comparator)
+		Here objects will be sorted on the basis of Compare method in Comparator
+	4:Java.util.Comparator - package
+	
+
+	Collections.sort(listOfCountries,new Comparator<Country>() {
+               @Override
+               public int compare(Country o1, Country o2) {
+                   return o1.getCountryName().compareTo(o2.getCountryName());
+               }
+           });
+
+8:

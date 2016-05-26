@@ -1,0 +1,94 @@
+
+Angular JS:
+
+Template: HTML with additional markup
+Directives : extend the html with custom elements and attributes
+Model: 	the data shown to the user in the view and with which the user interacts
+Scope:	context where the model is stored so that controllers, directives and expressions can access it
+Expressions:	access variables and functions from the scope
+Compiler:	parses the template and instantiates directives and expressions
+Filter:	formats the value of an expression for display to the user
+View: what the user sees (the DOM)
+Data binding: 	sync data between the model and the view
+Controller:	the business logic behind views
+Dependency Injections:	Creates and wires objects and functions
+Injector:	dependency injection container
+Module:	a container for the different parts of an app including controllers, services, filters, directives which configures the Injector
+Service:	reusable business logic independent of views
+
+
+1:Difference between $scope and $rootScope
+$scope:
+We can get ng-model properties in particular controller from the particular page by using this
+$rootScope
+We can get all ng-model properties in any controller from any page by using this.
+
+2:$cacheFactory.Cache
+A cache object used to store and retrieve data, primarily used by $http and the script directive to cache templates and other data.
+angular.module('superCache')
+  .factory('superCache', ['$cacheFactory', function($cacheFactory) {
+    return $cacheFactory('super-cache');
+  }]);
+
+
+3:$compile.directive.Attributes
+A shared object between directive compile / linking functions which contains normalized DOM element attributes. The values reflect current binding state {{ }}. The normalization is needed since all of these are treated as equivalent in Angular:
+<span ng:bind="a" ng-bind="a" data-ng-bind="a" x-ng-bind="a">
+
+$normalize(name);
+Converts an attribute name (e.g. dash/colon/underscore-delimited string, optionally prefixed with x- or data-) to its normalized, camelCase form.
+Also there is special case for Moz prefix starting with upper case letter.
+
+4:Angular JS Life Cycle:
+	1: Bootstrap phase
+		which occurs when the AngularJS JavaScript library is downloaded to the browser. AngularJS initializes its own necessary components and then initializes your module,
+		which the ng-app directive points to. The module is loaded, and any dependencies are injected into your module and made available to code within the module
+	2: Compilation phase
+		HTML compilation stage. Initially when a web page is loaded, a static form of the DOM is loaded in the browser. 
+		During the compilation phase, the static DOM is replaced with a dynamic DOM that represents the AngularJS view.
+		
+		This phase involves two parts: traversing the static DOM and collecting all the directives and then linking the directives 
+		to the appropriate JavaScript functionality in the AngularJS built-in library or custom directive code. 
+		The directives are combined with a scope to produce the dynamic or live view.
+	3: Runtime DataBinding Phase
+		which exists until the user reloads or navigates away from a web page. At that point, any changes in the scope are reflected in the view, 
+		and any changes in the view are directly updated in the scope, making the scope the single source of data for the view.
+		AngularJS behaves differently from traditional methods of binding data. Traditional methods combine a template with data received from the engine and
+		then manipulate the DOM each time the data changes. AngularJS compiles the DOM only once and then links the compiled template as necessary, 
+		making it much more efficient than traditional methods.
+
+5: Directive Life Cycle:
+6: Factory:
+	A factory is a simple Javascript function which allows you to add some logic before creating the object. It returns the created object.
+		var module = angular.module('myapp', []);    
+		module.factory('serviceName', function(){    
+		return serviceObject;    
+		});  
+
+7: ng-bind 	& ng-model
+	ng-bind -  is one way data binding used for displaying the value inside html component as inner HTML.
+		This directive can not be used for binding with the variable but only with the HTML elements content.
+	ng-model - This works as two way data binding.
+8: Isolated scope:
+	A "child scope" (prototypically) inherits properties from its parent scope. An "isolate scope" does not. See isolated scopes for more information.
+	What we want to be able to do is separate the scope inside a directive from the scope outside, and then map the outer scope to a directive's inner scope.
+	We can do this by creating what we call an isolate scope. To do this, we can use a directive's scope option:
+9:	Interpolation
+	Interpolation markup with embedded expressions is used by Angular to provide data-binding to text nodes and attribute values
+		<a ng-href="img/{{username}}.jpg">Hello {{username}}!</a>
+10: Spring MVC and AngularJS
+	1:Create AngularJS Module
+	2:Create AngularJS Service to communicate with Server
+	3:Create AngularJS Controller
+	4:Create View for Spring MVC application
+	5:Create REST Controller for Spring MVC application
+	6:Create Main Controller for Spring MVC application
+
+11: Difference between service and factory?
+	Factory:
+	When you’re using a Factory you create an object, add properties to it, then return that same object.
+	When you pass this service into your controller, those properties on the object will now be available in that controller through your factory.
+	
+	Service:
+	When you’re using Service, it’s instantiated with the ‘new’ keyword. Because of that, you’ll add properties to ‘this’ and the service will return ‘this’.
+	When you pass the service into your controller, those properties on ‘this’ will now be available on that controller through your service.

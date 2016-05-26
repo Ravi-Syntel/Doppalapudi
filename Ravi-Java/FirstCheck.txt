@@ -1,0 +1,32 @@
+
+
+5408, jade springs way, rancho cordova, ca 95742
+
+
+
+
+tell me about your self
+
+1: my educational bakground
+2: my working company
+3: technical skills
+4: domain knowledge
+
+Roles and Responsibilities
+1: praticipating the bussiness requirement mettings
+2: Analysing the impact analysis based on that am preapring the design documents.
+3: Developed the UI Screens
+4: Developed the server intraction files
+5: code reviews
+6: code merge and checkin and continus integration for deployments
+7: Co ordinate the team members
+8: taking care the UAT and PROD issues
+
+Junit:
+@Test
+@Test (expected = Exception.class)
+@Test(timeout=100)
+@Before
+@After
+@BeforeClass
+@AfterClass
