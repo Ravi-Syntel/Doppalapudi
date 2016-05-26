@@ -1,0 +1,16 @@
+Project
+
+1: auhentication and authorization
+2: security 
+3: UI - GWT
+4: Server side - REST API
+5: Loading the data - Spring batch
+6: Technical MetaData - MQs
+7: Export external source - Bigdata - using hadoop
+8: Schedulers - Quartz
+9: Backend : Teradata
+10: Build  - Ant tool 
+11: Deployment - Cloud environment 
+12: Code base - Clear Case
+
+http://java-questions.com/keywords-in-java.html
